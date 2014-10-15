@@ -1,0 +1,417 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="WhosOnFirst.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"
+    mc:Ignorable="d"
+    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+
+        <phone:Pivot Name="MainPagePivot" Title="Who's On First?">
+            <phone:Pivot.Background>
+                <ImageBrush ImageSource="/Images/wall.jpg" Opacity="0.30000001192092896" Stretch="None">
+                    <ImageBrush.RelativeTransform>
+                        <CompositeTransform CenterY="0.5" CenterX="0.5"/>
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
+            </phone:Pivot.Background>
+            <!--Pivot item one-->
+            <phone:PivotItem Header="lookup">
+                <!--Double line list with text wrapping-->
+                <ScrollViewer>
+                    <StackPanel>
+                        <Grid>
+                            <TextBlock FontSize="26" Margin="43,0,147,0">
+                        		<Run FontWeight="Bold" Text="Search"/>
+                            </TextBlock>
+
+                            <Image Name="Expand_Me6" Visibility="Collapsed" Tap="Expand_Me6_Tap" Height="39" Source="/Images/expand_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Collapse_Me6" Visibility="Visible" Tap="Collapse_Me6_Tap" Height="39" Source="/Images/collapse_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+
+                        <StackPanel Name="SearchStack" Visibility="Visible">
+                            <TextBox Name="SearchFirst" GotFocus="SearchFirst_GotFocus" Text="First Name" />
+                            <TextBox Name="SearchLast" GotFocus="SearchLast_GotFocus" Text="Last Name" />
+                            <toolkit:ListPicker x:Name="ServiceLine">
+                                <toolkit:ListPickerItem x:Name="ServLineNull" Content="(Service Line)" />
+                                <toolkit:ListPickerItem x:Name="AppDev" Content="AppDev" />
+                                <toolkit:ListPickerItem x:Name="ATS" Content="ATS/IS" />
+                                <toolkit:ListPickerItem x:Name="Ax" Content="AX" />
+                                <toolkit:ListPickerItem x:Name="Ce" Content="CE" />
+                            </toolkit:ListPicker>
+                            <toolkit:ListPicker Name="Region">
+                                <toolkit:ListPickerItem Name="RegionNull" Content="(Region)" />
+                                <toolkit:ListPickerItem Name="NYMetro" Content="NY Metro" />
+                                <toolkit:ListPickerItem Name="Southwest" Content="Southwest" />
+                                <toolkit:ListPickerItem Name="Southeast" Content="Southeast" />
+                                <toolkit:ListPickerItem Name="NewEngland" Content="New England" />
+                            </toolkit:ListPicker>
+                            <Button Name="SearchPerson" Height="95" Content="Search for Person" Click="SearchButton_Click" />
+                        </StackPanel>
+
+
+                        <Grid>
+                            <TextBlock FontSize="26" Margin="43,0,147,0">
+                        		<Run FontWeight="Bold" Text="Results"/>
+                            </TextBlock>
+
+                            <Image Name="Expand_Me5" Visibility="Collapsed" Tap="Expand_Me5_Tap" Height="39" Source="/Images/expand_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Collapse_Me5" Visibility="Visible" Tap="Collapse_Me5_Tap" Height="39" Source="/Images/collapse_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+                        <StackPanel x:Name="ResultsStack" Visibility="Collapsed">
+                            <Grid>
+                                <TextBlock FontSize="22" Width="303" Height="48" HorizontalAlignment="Right" Margin="0,13,28,4">
+                        			<Run Text="Scott Friedman"/>
+                                </TextBlock>
+                                <Button Name="ViewPerson" Content="View" Width="125" Click="ViewPerson_Click" HorizontalAlignment="Left" Margin="0,-7,0,0"/>
+                            </Grid>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="7*"/>
+                                    <ColumnDefinition Width="31*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock FontSize="22" Width="303" Height="48" HorizontalAlignment="Right" Margin="0,13,28,4" Grid.Column="1">
+                        			<Run Text="Scott Fitzgerald"/>
+                                </TextBlock>
+                                <Button Content="View" Width="125" HorizontalAlignment="Left" Margin="0,-7,0,0" Grid.ColumnSpan="2"/>
+                            </Grid>
+                        </StackPanel>
+
+
+
+
+
+
+                    </StackPanel>
+
+                </ScrollViewer>
+            </phone:PivotItem>
+
+            <!--Pivot item two-->
+            <phone:PivotItem Header="teams">
+                <StackPanel>
+                    <TextBlock Name="FullNameText" HorizontalAlignment="Center" FontSize="28" Text="" />
+                    <toolkit:ListPicker Name="TeamList">
+                        <toolkit:ListPickerItem Name="TeamNULL" Content="(Project)" />
+                        <toolkit:ListPickerItem Name="Clienta" Content="AIG" />
+                        <toolkit:ListPickerItem Name="Client1" Content="Citi" />
+                        <toolkit:ListPickerItem Name="Client2" Content="Fannie Mae" />
+                        <toolkit:ListPickerItem Name="Client3" Content="JPM" />
+                    </toolkit:ListPicker>
+
+                    <toolkit:ListPicker Name="GroupByList">
+                        <toolkit:ListPickerItem Name="GroupByNULL" Content="(Group By)" />
+                        <toolkit:ListPickerItem Name="TeamRole" Content="Team Role" />
+                        <toolkit:ListPickerItem Name="Region2" Content="Region" />
+                        <toolkit:ListPickerItem Name="ClientType" Content="Client Type" />
+                    </toolkit:ListPicker>
+                <Button Name="GroupProjSubmit" Content="Submit" Click="GroupProjSubmit_Click"/>
+                    
+                    
+                    
+                    <ScrollViewer>
+                        <StackPanel Name="GroupByTeamRole" Visibility="Collapsed">
+                            <TextBlock Height="29" >
+                    		<Run FontWeight="Bold" Text="BA Team"/><LineBreak/></TextBlock>
+                        <Grid>
+                            <Image Name="Barney1" Visibility="Visible" Height="42" Source="/Images/barney.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Robin1" Visibility="Visible" Height="42" Source="/Images/robin.png" Margin="43,0,372,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+                        
+                        <TextBlock Margin="0,0,0,0">
+                    		<Run Text="Barney Stintson"/>
+                    		<LineBreak/>
+                    		<Run Text="Robin Scherbatsky"/>
+               
+                    		<LineBreak/></TextBlock>
+                            
+                            <Grid>
+                            <Image Name="Scott1" Visibility="Visible" Height="42" Source="/Images/scott.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            </Grid>
+                        <TextBlock>
+                    		<Run FontWeight="Bold" Text="Infrastructure"/>
+                    		<LineBreak/>
+                    		<Run Text="Scott Friedman"/>
+                    		<LineBreak/></TextBlock>
+
+
+                        <Grid>
+                            <Image Name="Ted1" Visibility="Visible" Height="42" Source="/Images/ted.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Marshall1" Visibility="Visible" Height="42" Source="/Images/marshall.png" Margin="43,0,372,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+                        <TextBlock><Run FontWeight="Bold" Text="AppDev"/>
+                    		<LineBreak/>
+                    		<Run Text="Ted Mosby"/>
+                    		<LineBreak/>
+                    		<Run Text="Marshall Eriksen"/>
+                    		<LineBreak/>
+                    		<Run Text="Lily Eriksen"/>
+                    		<LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                    		<LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                            <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                            <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                            <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                            <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                            <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                            <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                            
+                        </TextBlock>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                    <ScrollViewer >
+                    <StackPanel Name="GroupByRegion" Visibility="Collapsed">
+                        
+                        <TextBlock >
+                    		<Run FontWeight="Bold" Text="Switzerland"/>
+                    		</TextBlock>
+                            <Grid>
+                            <Image Name="Barney2" Visibility="Visible" Height="42" Source="/Images/barney.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Robin2" Visibility="Visible" Height="42" Source="/Images/robin.png" Margin="43,0,372,0" RenderTransformOrigin="2.177,-7.258"/>
+                             </Grid>
+                        <TextBlock>
+                    		<Run Text="Barney Stintson"/>
+                    		<LineBreak/>
+                    		<Run Text="Robin Scherbatsky"/>
+                    		<LineBreak/>
+                    		<Run/>
+                    		<LineBreak/>
+                            
+                    		<Run FontWeight="Bold" Text="New York"/>
+                    		</TextBlock>
+                            <Grid>
+                            <Image Name="Scott2" Visibility="Visible" Height="42" Source="/Images/scott.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Ted2" Visibility="Visible" Height="42" Source="/Images/ted.png" Margin="43,0,372,0" RenderTransformOrigin="2.177,-7.258"/>
+                            </Grid>
+                        <TextBlock><Run Text="Scott Friedman"/>
+                    		<LineBreak/>
+                    		<Run Text="Ted Mosby"/>
+                    		<LineBreak/>
+                    		<Run/>
+                    		<LineBreak/>
+                            
+                    		<Run FontWeight="Bold" Text="Italy"/>
+                    		</TextBlock>
+                            <Grid>
+                            <Image Name="Marshall2" Visibility="Visible" Height="42" Source="/Images/marshall.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Lily1" Visibility="Visible" Height="42" Source="/Images/lily.png" Margin="43,0,372,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+                    		<TextBlock><Run Text="Marshall Eriksen"/>
+                    		<LineBreak/>
+                    		<Run Text="Lily Eriksen"/>
+                    		<LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                    		<LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                                <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                                <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                                <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                                <LineBreak/>
+                    		<Run FontWeight="Bold"/>
+                        </TextBlock>
+
+                        </StackPanel>
+                    </ScrollViewer>
+
+                </StackPanel>
+            </phone:PivotItem>
+
+
+
+            <!--Pivot item three-->
+            <phone:PivotItem Header="me">
+                <ScrollViewer>
+                    <StackPanel ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <Grid>
+                            <TextBlock FontSize="26" Margin="43,0,147,0">Common Misspellings</TextBlock>
+
+                            <Image Name="Expand_Me" Tap="Expand_Me_Tap" Height="39" Source="/Images/expand_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Collapse_Me" Visibility="Collapsed" Tap="Collapse_Me_Tap" Height="39" Source="/Images/collapse_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+
+                        <StackPanel Name="MisspellingsStack" Visibility="Collapsed">
+                            <TextBlock FontSize="20">Misspellings: First Name</TextBlock>
+
+                            <TextBox Foreground="Gray" Text="n/a" />
+                            <TextBox Text="Alexandrowicz, Aleksandrowich, Alexandrowich" />
+                            <Button Name="Submit" Height="92" Content="Save Changes" Click="SearchButton_Click" />
+                        </StackPanel>
+
+
+
+                        <Grid>
+                            <TextBlock FontSize="26" Margin="43,0,147,0">Skills</TextBlock>
+
+                            <Image Name="Expand_Me2" Tap="Expand_Me2_Tap" Height="39" Source="/Images/expand_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Collapse_Me2" Visibility="Collapsed" Tap="Collapse_Me2_Tap" Height="39" Source="/Images/collapse_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+                        <StackPanel x:Name="SkillsStack" Visibility="Collapsed">
+                            <Grid>
+                                <Button Content="Add" HorizontalAlignment="Left" />
+                                <Button Content="Edit" HorizontalAlignment="Left" Margin="81,0,0,0" />
+                            </Grid>
+                            <TextBlock Width="436" HorizontalAlignment="Right">
+                        		<Run Text="C++"/>
+                        		<LineBreak/>
+                        		<Run Text="C#"/>
+                        		<LineBreak/>
+                        		<Run Text="Windows Phone"/>
+                        		<LineBreak/>
+                        		<Run Text="HTML5"/>
+                        		<LineBreak/>
+                        		<Run Text="CSS3"/>
+                        		<LineBreak/>
+                        		<Run Text="JavaScript"/>
+                        		<LineBreak/>
+                        		<Run Text="jQuery"/>
+                            </TextBlock>
+                            <Button x:Name="Submit2" Height="92" Content="Save Changes" Click="Submit2_Click" />
+
+                        </StackPanel>
+
+
+
+                        <Grid>
+                            <TextBlock FontSize="26" Margin="43,0,147,0">Project Experience</TextBlock>
+
+                            <Image Name="Expand_Me3" Tap="Expand_Me3_Tap" Height="39" Source="/Images/expand_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Collapse_Me3" Visibility="Collapsed" Tap="Collapse_Me3_Tap" Height="39" Source="/Images/collapse_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+
+                        <StackPanel Name="ProjectsStack" Visibility="Collapsed">
+                            <Button Content="Add Project" Width="183" HorizontalAlignment="Left" />
+                            <Grid x:Name="ExxonMobil" Background="Transparent">
+                                <TextBlock Padding="5" FontSize="20" Width="360" HorizontalAlignment="Right">
+                        			<Run FontWeight="Bold" Text="ExxonMobil"/>
+                        			<LineBreak/>
+                        			<Run Text="Oil, Gas, Energy"/>
+                        			<LineBreak/>
+                        			<Run Text="03/03/14 - Present"/>
+                        			<LineBreak/>
+                        			<Run Text="Tester"/>
+                                </TextBlock>
+                                <Button x:Name="Edit_Exxon" Content="Edit" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+
+                            <Grid x:Name="XL_Global" Tap="XL_Global_Tap" Background="Transparent">
+                                <TextBlock Padding="5" FontSize="20" Width="360" HorizontalAlignment="Right">
+                        			<Run FontWeight="Bold" Text="XL Group"/>
+                        			<LineBreak/>
+                        			<Run Text="Insurance, Reinsurance"/>
+                        			<LineBreak/>
+                        			<Run Text="02/03/14 - 02/26/14"/>
+                        			<LineBreak/>
+                        			<Run Text="Business Development Analyst"/>
+                                </TextBlock>
+                                <Button x:Name="Edit_XLG" Content="Edit" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+                            <Grid x:Name="MSK" Background="Transparent">
+                                <TextBlock Padding="5" FontSize="20" Width="360" HorizontalAlignment="Right">
+                            		<Run FontWeight="Bold" Text="Memorial Sloan Kettering"/>
+                            		<LineBreak/>
+                            		<Run Text="Cancer Research Center"/>
+                            		<LineBreak/>
+                            		<Run Text="12/01/14 - 1/29/14"/>
+                            		<LineBreak/>
+                            		<Run Text="Tester"/>
+                                </TextBlock>
+                                <Button x:Name="Edit_MSK" Content="Edit" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top"/>
+
+                            </Grid>
+
+                        </StackPanel>
+
+
+
+                        <Grid>
+                            <TextBlock FontSize="26" Margin="43,0,147,0">Job Experience</TextBlock>
+
+                            <Image Name="Expand_Me4" Tap="Expand_Me4_Tap" Height="39" Source="/Images/expand_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                            <Image Name="Collapse_Me4" Visibility="Collapsed" Tap="Collapse_Me4_Tap" Height="39" Source="/Images/collapse_me.png" Margin="-3,0,418,0" RenderTransformOrigin="2.177,-7.258"/>
+                        </Grid>
+
+                        <StackPanel Name="JobsStack" Visibility="Collapsed">
+                            <Button Content="Sync with LinkedIn" Width="252" HorizontalAlignment="Center" />
+                            <Grid x:Name="Verizon" Background="Transparent">
+                                <TextBlock Padding="5" FontSize="20" Width="360" HorizontalAlignment="Right">
+                                	<Run FontWeight="Bold" Text="Verizon"/>
+                                	<LineBreak/>
+                                	<Run Text="Telecommunications"/>
+                                	<LineBreak/>
+                                	<Run Text="09/01/12 - 08/01/13"/>
+                                	<LineBreak/>
+                                	<Run Text="Wireless Engineer"/>
+                                </TextBlock>
+                                <Button x:Name="Edit_Exxon2" Content="Edit" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+
+                            <Grid x:Name="Scholastic" Background="Transparent">
+                                <TextBlock Padding="5" FontSize="20" Width="360" HorizontalAlignment="Right">
+                                	<Run FontWeight="Bold" Text="Scholastic"/>
+                                	<LineBreak/>
+                                	<Run Text="Books/Entertainment"/>
+                                	<LineBreak/>
+                                	<Run Text="12/01/11 - 09/22/12"/>
+                                	<LineBreak/>
+                                	<Run Text="Editorial Intern"/>
+                                </TextBlock>
+                                <Button x:Name="Edit_Exxon3" Content="Edit" HorizontalAlignment="Left" Margin="0,23,0,0" VerticalAlignment="Top"/>
+                            </Grid>
+
+
+
+                        </StackPanel>
+
+
+
+                        <StackPanel Height="300"></StackPanel>
+                    </StackPanel>
+
+                </ScrollViewer>
+            </phone:PivotItem>
+
+
+            <!--Pivot item 4-->
+            <phone:PivotItem Header="colleagues">
+                <StackPanel>
+                    <TextBlock Name="CollText" HorizontalAlignment="Center" FontSize="28" Text="Nothing here yet :)" />
+
+                </StackPanel>
+            </phone:PivotItem>
+
+
+        </phone:Pivot>
+
+        <!--Uncomment to see an alignment grid to help ensure your controls are
+            aligned on common boundaries.  The image has a top margin of -32px to
+            account for the System Tray. Set this to 0 (or remove the margin altogether)
+            if the System Tray is hidden.
+
+            Before shipping remove this XAML and the image itself.-->
+        <!--<Image Source="/Assets/AlignmentGrid.png" VerticalAlignment="Top" Height="800" Width="480" Margin="0,-32,0,0" Grid.Row="0" IsHitTestVisible="False" />-->
+    </Grid>
+
+</phone:PhoneApplicationPage>
